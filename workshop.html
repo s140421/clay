@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Shop</title>
+        <title>Workshop</title>
         <link rel="stylesheet" href="style.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -15,13 +15,13 @@
                 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link"  href="index.html">Home</a>
+                        <a class="nav-link "  href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="workshop.html">Workshop</a>
+                        <a class="nav-link active"  href="workshop.html">Workshop</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="shop.html">Shop</a>
+                        <a class="nav-link" href="shop.html">Shop</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"  href="about.html">About</a>
@@ -33,90 +33,58 @@
             </nav>
         </div>
         
-        
         <br>
-        <div class="headerpage" style="background-image:url(shop_cover.jpg);">
-           <h1 class="clay" style="font-size:180px;color:#ede7db;  text-align: center;">Shop</h1>
+        <div class="headerpage" style="background-image:linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)),url(workshop_cover.jpg);">
+           <h1 class="clay" style="font-size:180px;color:#ede7db;  text-align: center; ">Workshops</h1>
            <br>
            <p style = "color:#ede7db; text-align: center;font-size: 20px">
-            Discover our collection of unique handmade pottery
+            Discover our pottery classes here
            </p>
         </div>
-        <br/>
-        <h1 style="color: #91988a; text-align: center; font-size: 80px;font-family: 'Caveat', sans-serif ; font-style: italic;">All Products</h1>
         <hr>
-        <table align="center" cellpadding="20" cellspacing="100">
-            <tr>
-                <td>
-                    <img src="bowl.jpg" alt="bowl" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Salad Bowls</h3>
-                    <p class="shop">5.500OMR</p>
-                </td>
-                <td>
-                    <img src="latte.jpg" alt="latte cup" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Latte Cups</h3>
-                    <p class="shop">8.000OMR</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="flower.jpg" alt="flower vase" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Flower Vase</h3>
-                    <p class="shop">8.500OMR</p>
-                </td>
-                <td>
-                    <img src="plates.jpg" alt="plates" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Serving Plates</h3>
-                    <p class="shop">5.000OMR</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="jars.jpg" alt="jars" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Gray Jars</h3>
-                    <p class="shop">10.000OMR</p>
-                </td>
-                <td>
-                    <img src="V60.jpg" alt="v60 cup" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">V60 Cups</h3>
-                    <p class="shop">5.000OMR</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="vases.jpg" alt="giant vase" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Decoration Vases</h3>
-                    <p class="shop">25.000OMR</p>
-                </td>
-                <td>
-                    <img src="vases2.jpg" alt="vases" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Vases</h3>
-                    <p class="shop">15.000OMR</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="matcha.jpg" alt="Matcha" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Matcha Cups</h3>
-                    <p class="shop">7.000OMR</p>
-                </td>
-                <td>
-                    <img src="set.jpg" alt="set" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Dinning Table Set</h3>
-                    <p class="shop">20.000OMR</p>
-                </td>
-            </tr>
-        </table>
+        <div id="group" style="margin: 50px 100px 50px 100px;text-align: center;">
+            <img src="group.jpg" style="float: left; padding-right: 20;" height="250" width="350">
+            <div style="margin-left: 400px;">
+            <h1 style="color: #91988a; font-family: Georgia, 'Times New Roman', Times, serif; text-align: center; "><b>Group Workshops</b></h1>
+            <p style="font-family: 'Times New Roman', Times, serif;">
+                Join us for a group pottery workshop where you can unleash you and your friends or family creativity
+                and enjoy creating pieces of art that reflect you.
+            </p>
+            <p style="font-family: 'Times New Roman', Times, serif; text-align: center;">12.000 OMR each</p>
+            <p style="font-family: 'Times New Roman', Times, serif;"><span style="color: rgb(143, 7, 7);">note: </span>you can enjoy a 50% discount 
+                if your group consists of more than five people.</p>
+            <button id="myButton" class="btn-primary" style="background-color: #91988a; color: white; align-items: center;">Book Workshop</button>
+            </div>
+        </div>
+        <hr>
+        <div id="individual" style="margin: 50px 150px 50px 160px;text-align: center;">
+            <img src="individual.jpg" style="float: right;" height="250" width="350">
+            <div style="margin-right: 400px;">
+            <h1 style="color: #91988a; font-family: Georgia, 'Times New Roman', Times, serif; text-align: center"><b>Individual Workshops</b></h1>
+            <p style="font-family: 'Times New Roman', Times, serif;">
+                Experience the joy of pottery in our intimate, personalized workshop. Get one-on-one guidance as you learn wheel throwing or hand-building 
+                techniques. Unleash your creativity and create unique pieces in a cozy studio filled with natural light.
+            </p>
+            <p style="font-family: 'Times New Roman', Times, serif; text-align: center;">12.000 OMR</p>
+            <button id="myButton" class="btn-primary" style="background-color: #91988a; color: white; align-items: center;">Book Workshop</button>
+            </div>
+        </div>
+        <hr>
+        <div id="kids" style="margin: 50px 100px 50px 100px; text-align: center;">
+            <img src="kids.jpg" style="float: left;" height="250" width="350">
+            <div style="margin-left: 400px;">
+            <h1 style="color: #91988a; font-family: Georgia, 'Times New Roman', Times, serif; text-align: center"><b>Kids Workshops</b></h1>
+            <p style="font-family: 'Times New Roman', Times, serif;">
+                Bring out your child's creativity with our kids pottery workshop! Our fun and interactive classes are designed for young artists to explore 
+                the world of pottery in a safe and supportive environment. Led by our experienced instructors, kids will learn basic pottery techniques 
+                while creating their own unique masterpieces.
+            </p>
+            <p style="font-family: 'Times New Roman', Times, serif; text-align: center;">6.000 OMR</p>
+            <button id="myButton" class="btn-primary" style="background-color: #91988a; color: white; align-items: center;">Book Workshop</button>
+            </div>
+        </div>
+        <hr>
+
     </body>
     <footer class="footer"></footer>
 </html>
