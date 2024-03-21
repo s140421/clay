@@ -20,9 +20,7 @@
   margin-right: 20px;
 }
 
-.navbar.nav {
- 
-}
+
 
 .nav-item img {
   width: 50px;
@@ -30,7 +28,14 @@
   margin-right: 10px;
 }
 
-.navbar-link {
-  
+.navbar-logo {
+  width: 50px; 
+  height: auto; 
 }
+.headerpage{margin-top: 45px;
+  background-size:cover; background-repeat: no-repeat ;
+  padding-top: 40%;padding: 10%; justify-content: center;}
+
+ 
+.footer{background-color: #91988a; height: 60px;  bottom: 0; left: 0; width: 100%;}
 
