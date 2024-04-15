@@ -1,123 +1,230 @@
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Shop</title>
-        <link rel="stylesheet" href="style.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    </head>
-    <body>
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               
-                <img src="logo2.jpg" alt="logo" class="navbar-logo">
-                
-                
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link"  href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"  href="workshop.html">Workshop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="shop.html">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"  href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+<head>
+    <title>Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <style>
+        .btn-primary {
+            display: block;
+            margin: 0 auto; /* This centers the button */
+        }
+        #cart-items {
+            list-style-type: none; /* Remove bullet points */
+            padding: 0; /* Remove default padding */
+        }
+    </style>
+    <script>
+        // Define item prices
+        const itemPrices = {
+            'salad-bowl': 5.500,
+            'latte-cup': 8.000,
+            'flower-vase': 8.500,
+            'serving-plates': 5.000,
+            'gray-jars': 10.000,
+            'v60-cups': 5.000,
+            'decoration-vases': 25.000,
+            'vases': 15.000,
+            'matcha-cups': 7.000,
+            'dinning-table-set': 20.000,
+            // Define prices for other items here
+        };
+
+        // Function to add item to cart
+        function addItem(itemId) {
+            const itemName = document.getElementById(itemId + '-name').innerText;
+            const itemPrice = itemPrices[itemId];
+            const itemTotal = itemPrice.toFixed(3) + ' OMR';
+            const cartItem = `<li>${itemName}: ${itemTotal}</li>`;
+            document.getElementById('cart-items').innerHTML += cartItem;
+            // Increment quantity
+            const inputField = document.getElementById(itemId);
+            inputField.value = parseInt(inputField.value) + 1;
+        }
+
+        // Function to calculate total price
+        function calculateTotal() {
+            let total = 0;
+            const itemQuantities = document.getElementsByClassName('item-quantity');
+            
+            for (let i = 0; i < itemQuantities.length; i++) {
+                const input = itemQuantities[i];
+                const itemId = input.id;
+                const quantity = parseInt(input.value);
+                total += itemPrices[itemId] * quantity;
+            }
+
+            document.getElementById('total').innerText = `Total Price: ${total.toFixed(3)} OMR`;
+        }
+
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <img src="logo2.jpg" alt="logo" class="navbar-logo">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link"  href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="workshop.html">Workshop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="shop.html">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="funpage.html">Fun</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+    <br>
+    <div class="headerpage" style="background-image:url(shop_cover.jpg);">
+       <h1 class="clay" style="font-size:180px;color:#ede7db;  text-align: center;">Shop</h1>
+       <br>
+       <p style="color:#ede7db; text-align: center;font-size: 20px">
+        Discover our collection of unique handmade pottery
+       </p>
+    </div>
+    <br/>
+    <h1 style="color: #91988a; text-align: center; font-size: 80px;font-family: 'Caveat', sans-serif ; font-style: italic;">All Products</h1>
+    <hr>
+    <table align="center" cellpadding="20" cellspacing="100">
+        <tr>
+            <td>
+                <img src="bowl.jpg" alt="bowl" height="300" width="500">
+                <br/>
+                <h3 class="shop" id="salad-bowl-name">Salad Bowls</h3>
+                <p class="shop">5.500 OMR</p>
+                <!-- Button to add salad bowls to cart -->
+                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('salad-bowl')">Add to Cart</button>
+                <!-- Quantity input field for salad bowls -->
+                <input type="hidden" id="salad-bowl" class="item-quantity" value="0">
+            </td>
+            <td>
+                <img src="latte.jpg" alt="latte cup" height="300" width="500">
+                <br/>
+                <h3 class="shop" id="latte-cup-name">Latte Cups</h3>
+                <p class="shop">8.000 OMR</p>
+                <!-- Button to add latte cups to cart -->
+                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('latte-cup')">Add to Cart</button>
+                <!-- Quantity input field for latte cups -->
+                <input type="hidden" id="latte-cup" class="item-quantity" value="0">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="flower.jpg" alt="flower vase" height="300" width="500">
+                <br/>
+                <h3 class="shop" id="flower-vase-name">Flower Vase</h3>
+                <p class="shop">8.500 OMR</p>
+                <!-- Button to add flower vases to cart -->
+                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('flower-vase')">Add to Cart</button>
+                <!-- Quantity input field for flower vases -->
+                <input type="hidden" id="flower-vase" class="item-quantity" value="0">
+            </td>
+            <td>
+                <img src="plates.jpg" alt="plates" height="300" width="500">
+                <br/>
+                <h3 class="shop" id="serving-plates-name">Serving Plates</h3>
+                <p class="shop">5.000 OMR</p>
+                <!-- Button to add serving plates to cart -->
+                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;" onclick="addItem('serving-plates')">Add to Cart</button>
+                <!-- Quantity input field for serving plates -->
+                <input type="hidden" id="serving-plates" class="item-quantity" value="0">
+            </td>
+        </tr>
         
-        
+        <tr>
+            <td>
+                <img src="jars.jpg" alt="jars" height="300" width="500">
+                <br/>
+                <h3 class="shop" id="gray-jars-name">Gray Jars</h3>
+                <p class="shop">10.000 OMR</p>
+                <!-- Button to add gray jars to cart -->
+                <button  class="btn-primary" style="background-color: #91988a; color: white; align-items: center;" onclick="addItem('gray-jars')">Add to Cart</button>
+                <!-- Quantity input field for gray jars -->
+                <input type="hidden" id="gray-jars" class="item-quantity" value="0">
+            </td>
+            <td>
+                <img src="V60.jpg" alt="v60 cup" height="300" width="500">
+                <br/>
+                <h3 class="shop" id="v60-cups-name">V60 Cups</h3>
+                <p class="shop">5.000 OMR</p>
+                <!-- Button to add v60 cups to cart -->
+                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('v60-cups')">Add to Cart</button>
+                <!-- Quantity input field for v60 cups -->
+                <input type="hidden" id="v60-cups" class="item-quantity" value="0">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="vases.jpg" alt="giant vase" height="300" width="500">
+                <br/>
+                <h3 class="shop" id="decoration-vases-name">Decoration Vases</h3>
+                <p class="shop">25.000 OMR</p>
+                <!-- Button to add decoration vases to cart -->
+                <button  class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('decoration-vases')">Add to Cart</button>
+                <!-- Quantity input field for decoration vases -->
+                <input type="hidden" id="decoration-vases" class="item-quantity" value="0">
+            </td>
+            <td>
+                <img src="vases2.jpg" alt="vases" height="300" width="500">
+                <br/>
+                <h3 class="shop" id="vases-name">Vases</h3>
+                <p class="shop">15.000 OMR</p>
+                <!-- Button to add vases to cart -->
+                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('vases')">Add to Cart</button>
+                <!-- Quantity input field for vases -->
+                <input type="hidden" id="vases" class="item-quantity" value="0">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="matcha.jpg" alt="Matcha" height="300" width="500">
+                <br/>
+                <h3 class="shop" id="matcha-cups-name">Matcha Cups</h3>
+                <p class="shop">7.000 OMR</p>
+                <!-- Button to add matcha cups to cart -->
+                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('matcha-cups')">Add to Cart</button>
+                <!-- Quantity input field for matcha cups -->
+                <input type="hidden" id="matcha-cups" class="item-quantity" value="0">
+            </td>
+            <td>
+                <img src="set.jpg" alt="set" height="300" width="500">
+                <br/>
+                <h3 class="shop" id="dinning-table-set-name">Dinning Table Set</h3>
+                <p class="shop">20.000 OMR</p>
+                <!-- Button to add dinning table set to cart -->
+                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"   onclick="addItem('dinning-table-set')">Add to Cart</button>
+                <!-- Quantity input field for dinning table set -->
+                <input type="hidden" id="dinning-table-set" class="item-quantity" value="0">
+            </td>
+        </tr>
+    </table>
+    
+    <!-- Shopping cart -->
+    <div style="text-align: center; background-color: #f2f2f2;">
         <br>
-        <div class="headerpage" style="background-image:url(shop_cover.jpg);">
-           <h1 class="clay" style="font-size:180px;color:#ede7db;  text-align: center;">Shop</h1>
-           <br>
-           <p style = "color:#ede7db; text-align: center;font-size: 20px">
-            Discover our collection of unique handmade pottery
-           </p>
-        </div>
-        <br/>
-        <h1 style="color: #91988a; text-align: center; font-size: 80px;font-family: 'Caveat', sans-serif ; font-style: italic;">All Products</h1>
-        <hr>
-        <table align="center" cellpadding="20" cellspacing="100">
-            <tr>
-                <td>
-                    <img src="bowl.jpg" alt="bowl" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Salad Bowls</h3>
-                    <p class="shop">5.500OMR</p>
-                </td>
-                <td>
-                    <img src="latte.jpg" alt="latte cup" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Latte Cups</h3>
-                    <p class="shop">8.000OMR</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="flower.jpg" alt="flower vase" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Flower Vase</h3>
-                    <p class="shop">8.500OMR</p>
-                </td>
-                <td>
-                    <img src="plates.jpg" alt="plates" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Serving Plates</h3>
-                    <p class="shop">5.000OMR</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="jars.jpg" alt="jars" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Gray Jars</h3>
-                    <p class="shop">10.000OMR</p>
-                </td>
-                <td>
-                    <img src="V60.jpg" alt="v60 cup" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">V60 Cups</h3>
-                    <p class="shop">5.000OMR</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="vases.jpg" alt="giant vase" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Decoration Vases</h3>
-                    <p class="shop">25.000OMR</p>
-                </td>
-                <td>
-                    <img src="vases2.jpg" alt="vases" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Vases</h3>
-                    <p class="shop">15.000OMR</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="matcha.jpg" alt="Matcha" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Matcha Cups</h3>
-                    <p class="shop">7.000OMR</p>
-                </td>
-                <td>
-                    <img src="set.jpg" alt="set" height="300" width="500">
-                    <br/>
-                    <h3 class="shop">Dinning Table Set</h3>
-                    <p class="shop">20.000OMR</p>
-                </td>
-            </tr>
-        </table>
-    </body>
-    <footer class="footer"></footer>
+        <h2 style="font-family: 'Times New Roman', Times, serif;">Shopping Cart</h2>
+        <ul style="font-family: 'Times New Roman', Times, serif;" id="cart-items"></ul>
+        <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;" onclick="calculateTotal()">Calculate Total Price </button>
+        <br>
+        <div style="font-family: 'Times New Roman', Times, serif;" id="total"></div>
+        <br>
+    </div>
+    <br>
+    <br>
+</body>
+<footer class="footer"></footer>
 </html>
