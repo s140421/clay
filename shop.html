@@ -16,25 +16,103 @@
             padding: 0; /* Remove default padding */
         }
     </style>
+     
     <script>
-        // Define item prices
-        const itemPrices = {
-            'salad-bowl': 5.500,
-            'latte-cup': 8.000,
-            'flower-vase': 8.500,
-            'serving-plates': 5.000,
-            'gray-jars': 10.000,
-            'v60-cups': 5.000,
-            'decoration-vases': 25.000,
-            'vases': 15.000,
-            'matcha-cups': 7.000,
-            'dinning-table-set': 20.000,
-            // Define prices for other items here
-        };
+
+        // Define object types for products
+        function Product(name, price, image) {
+    this.name = name;
+    this.price = price;
+    this.image = image;
+    this.createButton = function() {
+        const addButton = document.createElement('button');
+        addButton.textContent = 'Add to Cart';
+        addButton.className = 'btn-primary';
+        addButton.style.backgroundColor = '#91988a';
+        addButton.style.color = 'white';
+        addButton.style.alignItems = 'center';
+        addButton.onclick = () => addItem(this.name.toLowerCase().replace(' ', '-'));
+        return addButton;
+    }
+}
+
+        // Constructor method for creating products
+        function createProduct(name, price, image) {
+            return new Product(name, price, image);
+        }
+
+        // Create product instances with images
+        const products = [
+            createProduct('Salad Bowls', 5.500, 'bowl.jpg'),
+            createProduct('Latte Cups', 8.000, 'latte.jpg'),
+            createProduct('Flower Vase', 8.500, 'flower.jpg'),
+            createProduct('Serving Plates', 5.000, 'plates.jpg'),
+            createProduct('Gray Jars', 10.000, 'jars.jpg'),
+            createProduct('V60 Cups', 5.000, 'V60.jpg'),
+            createProduct('Decoration Vases', 25.000, 'vases.jpg'),
+            createProduct('Vases', 15.000, 'vases2.jpg'),
+            createProduct('Matcha Cups', 7.000, 'matcha.jpg'),
+            createProduct('Dinning Table Set', 20.000, 'set.jpg')
+        ];
+
+        // Function to dynamically populate the product table
+        function populateProductTable() {
+            const tableBody = document.querySelector('#product-table tbody');
+            tableBody.innerHTML = '';
+
+            // Loop through products to populate table rows
+            products.forEach(product => {
+                const row = tableBody.insertRow();
+                
+                // Insert image cell
+                const imgCell = row.insertCell();
+                const img = document.createElement('img');
+                img.src = product.image;
+                img.alt = product.name;
+                img.height = 150; // Set height of image
+                img.width = 250; // Set width of image
+                imgCell.appendChild(img);
+                
+                // Insert name cell
+                const nameCell = row.insertCell();
+                nameCell.textContent = product.name;
+
+                // Insert price cell
+                const priceCell = row.insertCell();
+                priceCell.textContent = `${product.price} OMR`;
+
+                // Insert button cell
+                const buttonCell = row.insertCell();
+                const addButton = product.createButton();
+                buttonCell.appendChild(addButton);
+                
+                // Quantity input field for product
+                const quantityInput = document.createElement('input');
+                quantityInput.type = 'hidden';
+                quantityInput.id = product.name.toLowerCase().replace(' ', '-');
+                quantityInput.className = 'item-quantity';
+                quantityInput.value = '0';
+                buttonCell.appendChild(quantityInput);
+            });
+
+        }
 
         // Function to add item to cart
         function addItem(itemId) {
             const itemName = document.getElementById(itemId + '-name').innerText;
+            const itemPrices = {
+                'salad-bowl': 5.500,
+                'latte-cup': 8.000,
+                'flower-vase': 8.500,
+                'serving-plates': 5.000,
+                'gray-jars': 10.000,
+                'v60-cups': 5.000,
+                'decoration-vases': 25.000,
+                'vases': 15.000,
+                'matcha-cups': 7.000,
+                'dinning-table-set': 20.000,
+                // Define prices for other items here
+            };
             const itemPrice = itemPrices[itemId];
             const itemTotal = itemPrice.toFixed(3) + ' OMR';
             const cartItem = `<li>${itemName}: ${itemTotal}</li>`;
@@ -53,14 +131,20 @@
                 const input = itemQuantities[i];
                 const itemId = input.id;
                 const quantity = parseInt(input.value);
-                total += itemPrices[itemId] * quantity;
+                total += products.find(product => product.name.toLowerCase().replace(' ', '-') === itemId).price * quantity;
             }
 
             document.getElementById('total').innerText = `Total Price: ${total.toFixed(3)} OMR`;
         }
 
+        // Call populateProductTable function when the DOM content is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            populateProductTable();
+        });
+
     </script>
 </head>
+
 <body>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -84,9 +168,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="funpage.html">Fun</a>
                 </li>
-                <li class="nav-item">
-                        <a class="nav-link" href="Questionnaire.html">Questionnaire</a>
-                    </li>
             </ul>
         </nav>
     </div>
@@ -102,118 +183,8 @@
     <br/>
     <h1 style="color: #91988a; text-align: center; font-size: 80px;font-family: 'Caveat', sans-serif ; font-style: italic;">All Products</h1>
     <hr>
-    <table align="center" cellpadding="20" cellspacing="100">
-        <tr>
-            <td>
-                <img src="bowl.jpg" alt="bowl" height="300" width="500">
-                <br/>
-                <h3 class="shop" id="salad-bowl-name">Salad Bowls</h3>
-                <p class="shop">5.500 OMR</p>
-                <!-- Button to add salad bowls to cart -->
-                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('salad-bowl')">Add to Cart</button>
-                <!-- Quantity input field for salad bowls -->
-                <input type="hidden" id="salad-bowl" class="item-quantity" value="0">
-            </td>
-            <td>
-                <img src="latte.jpg" alt="latte cup" height="300" width="500">
-                <br/>
-                <h3 class="shop" id="latte-cup-name">Latte Cups</h3>
-                <p class="shop">8.000 OMR</p>
-                <!-- Button to add latte cups to cart -->
-                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('latte-cup')">Add to Cart</button>
-                <!-- Quantity input field for latte cups -->
-                <input type="hidden" id="latte-cup" class="item-quantity" value="0">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img src="flower.jpg" alt="flower vase" height="300" width="500">
-                <br/>
-                <h3 class="shop" id="flower-vase-name">Flower Vase</h3>
-                <p class="shop">8.500 OMR</p>
-                <!-- Button to add flower vases to cart -->
-                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('flower-vase')">Add to Cart</button>
-                <!-- Quantity input field for flower vases -->
-                <input type="hidden" id="flower-vase" class="item-quantity" value="0">
-            </td>
-            <td>
-                <img src="plates.jpg" alt="plates" height="300" width="500">
-                <br/>
-                <h3 class="shop" id="serving-plates-name">Serving Plates</h3>
-                <p class="shop">5.000 OMR</p>
-                <!-- Button to add serving plates to cart -->
-                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;" onclick="addItem('serving-plates')">Add to Cart</button>
-                <!-- Quantity input field for serving plates -->
-                <input type="hidden" id="serving-plates" class="item-quantity" value="0">
-            </td>
-        </tr>
-        
-        <tr>
-            <td>
-                <img src="jars.jpg" alt="jars" height="300" width="500">
-                <br/>
-                <h3 class="shop" id="gray-jars-name">Gray Jars</h3>
-                <p class="shop">10.000 OMR</p>
-                <!-- Button to add gray jars to cart -->
-                <button  class="btn-primary" style="background-color: #91988a; color: white; align-items: center;" onclick="addItem('gray-jars')">Add to Cart</button>
-                <!-- Quantity input field for gray jars -->
-                <input type="hidden" id="gray-jars" class="item-quantity" value="0">
-            </td>
-            <td>
-                <img src="V60.jpg" alt="v60 cup" height="300" width="500">
-                <br/>
-                <h3 class="shop" id="v60-cups-name">V60 Cups</h3>
-                <p class="shop">5.000 OMR</p>
-                <!-- Button to add v60 cups to cart -->
-                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('v60-cups')">Add to Cart</button>
-                <!-- Quantity input field for v60 cups -->
-                <input type="hidden" id="v60-cups" class="item-quantity" value="0">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img src="vases.jpg" alt="giant vase" height="300" width="500">
-                <br/>
-                <h3 class="shop" id="decoration-vases-name">Decoration Vases</h3>
-                <p class="shop">25.000 OMR</p>
-                <!-- Button to add decoration vases to cart -->
-                <button  class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('decoration-vases')">Add to Cart</button>
-                <!-- Quantity input field for decoration vases -->
-                <input type="hidden" id="decoration-vases" class="item-quantity" value="0">
-            </td>
-            <td>
-                <img src="vases2.jpg" alt="vases" height="300" width="500">
-                <br/>
-                <h3 class="shop" id="vases-name">Vases</h3>
-                <p class="shop">15.000 OMR</p>
-                <!-- Button to add vases to cart -->
-                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('vases')">Add to Cart</button>
-                <!-- Quantity input field for vases -->
-                <input type="hidden" id="vases" class="item-quantity" value="0">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img src="matcha.jpg" alt="Matcha" height="300" width="500">
-                <br/>
-                <h3 class="shop" id="matcha-cups-name">Matcha Cups</h3>
-                <p class="shop">7.000 OMR</p>
-                <!-- Button to add matcha cups to cart -->
-                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"  onclick="addItem('matcha-cups')">Add to Cart</button>
-                <!-- Quantity input field for matcha cups -->
-                <input type="hidden" id="matcha-cups" class="item-quantity" value="0">
-            </td>
-            <td>
-                <img src="set.jpg" alt="set" height="300" width="500">
-                <br/>
-                <h3 class="shop" id="dinning-table-set-name">Dinning Table Set</h3>
-                <p class="shop">20.000 OMR</p>
-                <!-- Button to add dinning table set to cart -->
-                <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;"   onclick="addItem('dinning-table-set')">Add to Cart</button>
-                <!-- Quantity input field for dinning table set -->
-                <input type="hidden" id="dinning-table-set" class="item-quantity" value="0">
-            </td>
-        </tr>
+    <table id="product-table" align="center">
+        <tbody></tbody>
     </table>
     
     <!-- Shopping cart -->
