@@ -101,47 +101,92 @@
            <p style = "color:#ede7db; text-align: center; font-size: 20px;">Welcome to Clay' where every piece tells a story </p>
         </div>
         <hr> 
-        
-        <table style="margin-left: 50px; display: flex; justify-content: center;">
-            <!--First row-->
-            <tr style="height: 130px;">
-                <td colspan="10" style="text-align: center; width: 200px;">
-                <h1 style="text-align: center; font-size: 80px ;font-family: 'Caveat', sans-serif; color: #91988a ">Workshops</h1>
-            </td>
-            </tr>
+        <script>
+            function Workshop(image, name, link){
+                this.image = image;
+                this.name = name;
+                this.link = link;
+                this.createButton = function() {
+                    const addButton = document.createElement('button');
+                    addButton.textContent = name;
+                    addButton.className = 'btn btn-outline-dark';
+                    addButton.style.alignItems = 'center';
+                    addButton.onclick = function() {
+                        window.location.href = link;
+                    };
+                    return addButton;
+                }
+            }
 
-            
-            <!--Second row-->
-            <tr style="background-color: #f2f2f2; width:100px;">
-                <td style="text-align: center;">
-                    <div style="margin: 20px;">
-                    <img src="pexels-ksenia-chernaya-3965526.jpg" alt="Kids workshop" class="rounded" width="320px" height="300px"> <br> <br> <br>
-                    <a href="workshop.html#kids">
-                    <button type="button" class="btn btn-outline-dark">Kids Workshop</button>
-                    </a>
-                </div>
-                </td>
+            const workshops = [
+                new Workshop('pexels-ksenia-chernaya-3965526.jpg','Kids Workshop','workshop.html#kids'),
+                new Workshop('image copy.png','Group Workshop','workshop.html#group'),
+                new Workshop('pexels-anastasia-shuraeva-5566939.jpg','Individual Workshop','workshop.html#individual')
+            ];
+
+            function populateWorkshopTable(){
+                const tableBody = document.querySelector('#workshop-table tbody');
+                tableBody.innerHTML = '';
+
+                const row = tableBody.insertRow();
+                workshops.forEach(workshop => {
+                    // Insert image cell
+                    const imgCell = row.insertCell();
+                    const img = document.createElement('img');
+                    img.src = workshop.image;
+                    img.alt = workshop.name;
+                    img.height = 300; 
+                    img.width = 320; 
+                    imgCell.appendChild(img);
+
+                    
+                });
+                const row2 = tableBody.insertRow();
+                workshops.forEach(workshop => {
+                    
                 
-                <td style="text-align: center;"> 
-                    <div style="margin: 20px;">
-                    <img src="image copy.png" alt="Group workshop" class="rounded" width="320px" height="300px"> <br> <br> <br>
-                    <a href="workshop.html#group">
-                    <button type="button" class="btn btn-outline-dark">Group Workshop</button>
-                    </a>
-                </div>
-                </td>
+                    // Insert button cell
+                    const buttonCell = row2.insertCell();
+                    const addButton = workshop.createButton();
+                    buttonCell.appendChild(addButton);
+                });
+            }
 
-                <td style="text-align: center; ">
-                    <div style="margin: 20px;">
-                    <img src="pexels-anastasia-shuraeva-5566939.jpg" alt="Individual workshop" class="rounded" width="320px" height="300px"> <br> <br> <br>
-                    <a href="workshop.html#individual">
-                    <button type="button" class="btn btn-outline-dark">Individual Workshop</button>
-                    </a>
-                </div>
-                 </td>
-            </tr>
-       
-        
+            function search() {
+                // Get the search query from the input field
+                const query = document.getElementById('search-input').value.toLowerCase();
+
+                // Perform the search operation on the array (e.g., products or workshops)
+                const searchResults = workshops.filter(workshops => workshops.name.toLowerCase().includes(query));
+
+                // Display search results or perform other actions as needed
+                displaySearchResults(searchResults);
+                }
+
+            function displaySearchResults(results) {
+                const searchResultsContainer = document.getElementById('search-results');
+                searchResultsContainer.innerHTML = '';
+
+                results.forEach(result => {
+                const resultItem = document.createElement('div');
+                resultItem.textContent = result.name;
+                searchResultsContainer.appendChild(resultItem);
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+            populateWorkshopTable();
+            });
+
+        </script>
+        <div>
+            <h1 style="text-align: center; font-size: 80px ;font-family: 'Caveat', sans-serif; color: #91988a ">Workshops</h1>
+            <br> <br> <br>
+        </div>
+        <table id="workshop-table" style="margin-left: 50px; display: flex; justify-content: center;" cellpadding = 10>
+            <tbody>
+            
+            </tbody>
         </table>
 
         <br>
@@ -193,7 +238,18 @@
         <hr>
 
         <br>
+        
+        <div style="text-align: center;">
+            <form onsubmit="search(); return false;">
+                <input type="text" id="search-input" placeholder="Search...">
+                <button type="submit" class="btn btn-outline-dark">Search</button>
+            </form>
+        </div>
+        <br>
 
+        
+        <div id="search-results" style="text-align: center;"></div>
+        <br>
         <div style="background-color: #f2f2f2; ">
             <table >
                 <tr style="width: 100%;">
