@@ -102,7 +102,7 @@
             const query = document.getElementById('search-input').value.toLowerCase();
 
             // Perform the search operation on the array (e.g., products or workshops)
-            const searchResults = products.filter(products => products.name.toLowerCase().includes(query));
+            const searchResults = products.filter(product => product.name.toLowerCase().includes(query));
 
             // Display search results or perform other actions as needed
             displaySearchResults(searchResults);
@@ -209,8 +209,10 @@
                 <input type="text" id="search-input" placeholder="Search...">
                 <button type="submit" class="btn btn-outline-dark">Search</button>
             </form>
-            <br>
         </div>
+        <br>
+        <div id="search-results" style="text-align: center;"></div>
+        <br>
     </div>
     <br>
     <br>
