@@ -11,14 +11,31 @@
             display: block;
             margin: 0 auto; 
         }
+        #product-table {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .product-item {
+            width: calc(100% / 3); 
+            padding: 10px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .product-item img {
+        max-width: 100%;
+        height: 400px; 
+        object-fit: cover; 
+}
+        
+        
         #cart-items {
-            list-style-type: none; 
-            padding: 0; 
+            list-style-type: none;
+            padding: 0;
         }
     </style>
      
     <script>
-
         // Define object types for products
         function Product(name, price, image) {
             this.name = name;
@@ -57,68 +74,39 @@
 
         // Function to dynamically populate the product table
         function populateProductTable() {
-            const tableBody = document.querySelector('#product-table tbody');
+            const tableBody = document.querySelector('#product-table');
             tableBody.innerHTML = '';
 
             // Loop through products to populate table rows
             products.forEach(product => {
-                const row = tableBody.insertRow();
+                const productItem = document.createElement('div');
+                productItem.className = 'product-item';
                 
-                // Insert image cell
-                const imgCell = row.insertCell();
+                // Insert image
                 const img = document.createElement('img');
                 img.src = product.image;
                 img.alt = product.name;
-                img.height = 150; // Set height of image
-                img.width = 250; // Set width of image
-                imgCell.appendChild(img);
+                productItem.appendChild(img);
                 
-                // Insert name cell
-                const nameCell = row.insertCell();
-                nameCell.textContent = product.name;
+                // Insert name
+                const name = document.createElement('p');
+                name.textContent = product.name;
+                productItem.appendChild(name);
 
-                // Insert price cell
-                const priceCell = row.insertCell();
-                priceCell.textContent = `${product.price} OMR`;
+                // Insert price
+                const price = document.createElement('p');
+                price.textContent = `${product.price} OMR`;
+                productItem.appendChild(price);
 
-                // Insert button cell
-                const buttonCell = row.insertCell();
+                // Insert button
                 const addButton = product.createButton();
-                buttonCell.appendChild(addButton);
+                productItem.appendChild(addButton);
                 
-                // Quantity input field for product
-                const quantityInput = document.createElement('input');
-                quantityInput.type = 'hidden';
-                quantityInput.id = product.name.toLowerCase().replace(' ', '-');
-                quantityInput.className = 'item-quantity';
-                quantityInput.value = '0';
-                buttonCell.appendChild(quantityInput);
+                // Append product item to table
+                tableBody.appendChild(productItem);
             });
 
         }
-
-        function search() {
-             // Get the search query from the input field
-            const query = document.getElementById('search-input').value.toLowerCase();
-
-            // Perform the search operation on the array (e.g., products or workshops)
-            const searchResults = products.filter(product => product.name.toLowerCase().includes(query));
-
-            // Display search results or perform other actions as needed
-            displaySearchResults(searchResults);
-        }
-
-        function displaySearchResults(results) {
-            const searchResultsContainer = document.getElementById('search-results');
-            searchResultsContainer.innerHTML = '';
-
-            results.forEach(result => {
-            const resultItem = document.createElement('div');
-            resultItem.textContent = result.name;
-            searchResultsContainer.appendChild(resultItem);
-            });
-        }
-        
 
         function addItem(itemName) {
             const itemPrice = products.find(product => product.name === itemName).price;
@@ -174,7 +162,7 @@
                     <a class="nav-link" href="funpage.html">Fun</a>
                 </li>
                 <li class="nav-item">
-                        <a class="nav-link" href="Questionnaire.html">Questionnaire</a>
+                    <a class="nav-link" href="Questionnaire.html">Questionnaire</a>
                 </li>
             </ul>
         </nav>
@@ -191,15 +179,13 @@
     <br/>
     <h1 style="color: #91988a; text-align: center; font-size: 80px;font-family: 'Caveat', sans-serif ; font-style: italic;">All Products</h1>
     <hr>
-    <table id="product-table" align="center">
-        <tbody></tbody>
-    </table>
+    <div id="product-table" class="row"></div>
     
     <!-- Shopping cart -->
     <div style="text-align: center; background-color: #f2f2f2;">
         <br>
         <h2 style="font-family: 'Times New Roman', Times, serif;">Shopping Cart</h2>
-        <ul style="font-family: 'Times New Roman', Times, serif;" id="cart-items"></ul>
+        <ul id="cart-items"></ul>
         <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;" onclick="calculateTotal()">Calculate Total Price</button>
         <br>
         <div style="font-family: 'Times New Roman', Times, serif;" id="total"></div>
