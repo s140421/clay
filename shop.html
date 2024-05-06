@@ -191,17 +191,18 @@
         <div style="font-family: 'Times New Roman', Times, serif;" id="total"></div>
         <br>
         <div style="text-align: center;">
-            <form onsubmit="search(); return false;">
-                <input type="text" id="search-input" placeholder="Search...">
-                <button type="submit" class="btn btn-outline-dark">Search</button>
-            </form>
+                  <!-- Search form -->
+                  <form action="search.php" method="POST">
+                    <input type="text" name="search_query" id="search-input" placeholder="Search...">
+                    <button type="submit" class="btn btn-outline-dark">Search</button>
+                </form>
+            </div>
+            <br>
+            <div id="search-results" style="text-align: center;"></div>
+            <br>
         </div>
         <br>
-        <div id="search-results" style="text-align: center;"></div>
         <br>
-    </div>
-    <br>
-    <br>
 </body>
 <footer class="footer"></footer>
 </html>
