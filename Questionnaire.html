@@ -59,7 +59,7 @@
                 const email = document.forms["feedbackForm"]["email"].value;
                 const gender = document.querySelector('input[type="radio"][name="gender"]:checked');
                 const age = document.querySelector('input[type="radio"][name="age"]:checked');
-                const services = document.querySelectorAll('input[type="checkbox"][name="services"]:checked');
+                const services = document.querySelectorAll('input[type="radio"][name="services"]:checked');
 
                 // validate password
                 if (!validatePassword(password)) {
@@ -152,7 +152,7 @@
     <br><br>
 
         <div style="margin-left: 100;">
-        <form action="javascript:void(0)" id="feedbackForm" onsubmit="return validateForm()">
+        <form action="QuesForm.php" method="post" action="javascript:void(0)" id="feedbackForm" onsubmit="return validateForm()">
             <h2 class="clay">Contact information: </h2>
             <label>Name: </label><input type="text" name="name" size="15px" placeholder="Enter your name: " >
             <br><br>
@@ -178,13 +178,13 @@
             <br><br><br>
 
             <h2 class="clay">Additional Services of Interest:</h2>
-            <label > <input type="checkbox" name="services" value="Studio rental">Studio rental</label>
+            <label > <input type="radio" name="services" value="Studio rental">Studio rental</label>
             <br>
-            <label><input type="checkbox" name="services" value="Custom pottery commissions">Custom pottery commissions</label>
+            <label><input type="radio" name="services" value="Custom pottery commissions">Custom pottery commissions</label>
             <br>
-            <label ><input type="checkbox" name="services" value="Pottery supplies and kits">Pottery supplies and kits</label>
+            <label ><input type="radio" name="services" value="Pottery supplies and kits">Pottery supplies and kits</label>
             <br>
-            <label ><input type="checkbox" name="services" value="Artisan gallery showcases">Artisan gallery showcases</label>
+            <label ><input type="radio" name="services" value="Artisan gallery showcases">Artisan gallery showcases</label>
 
             <br><br><br>
 
