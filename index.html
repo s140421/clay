@@ -68,7 +68,7 @@
                 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active"  href="index.html" >Home</a>
+                        <a class="nav-link active"  href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"  href="workshop.html">Workshop</a>
@@ -111,6 +111,8 @@
                     addButton.textContent = name;
                     addButton.className = 'btn btn-outline-dark';
                     addButton.style.alignItems = 'center';
+                    addButton.style.display = 'block'; 
+                    addButton.style.margin = '0 auto'; 
                     addButton.onclick = function() {
                         window.location.href = link;
                     };
@@ -285,13 +287,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <form action="indexForm.php" method="post">
-                                        <div class="mb-3 mt-3">
-                                            <label for="email">Name: </label>
-                                            <input type="text" class="form-control" placeholder="Enter your name:" name="name" style="width: 350px;" required>
-                                            
-                                        </div>
-
+                                    <form action="">
                                         <div class="mb-3 mt-3">
                                             <label for="email">Email: </label>
                                             <input type="email" class="form-control" placeholder="Enter email" name="email" style="width: 350px;" required>
@@ -314,7 +310,7 @@
 
         </div>
         <div class="moving-banner">
-            <p style="font-size: 24px; padding: 10px;">
+            <p style="font-size: 24px; padding: 5px;">
                 Welcome to Clay' website! Today is <span id="current-date"></span>, and the time is <span id="current-time"></span>
             </p>
         </div>
