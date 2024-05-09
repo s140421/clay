@@ -25,7 +25,7 @@
                 width: 100%;
                 background-color: #f2f2f2;
                 overflow: hidden;
-                animation: moveBanner 20s linear infinite; /* Adjust animation duration as needed */
+                animation: moveBanner 20s linear infinite; 
             }
 
             @keyframes moveBanner {
@@ -50,7 +50,7 @@
             .gallery img {
                 width: 100%;
                 height: auto;
-                display: none; /* Hide all images initially */
+                display: none; 
             }
 
         </style>
@@ -106,11 +106,9 @@
             <br> <br> <br>
         </div> 
         <?php 
-        //error checking
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
+    
 
-        //define a workshop class
+        //a workshop class
         class workshop{
             //each workshop has:
             public $image;
@@ -133,7 +131,7 @@
 
             
         }
-        //define an array of object to maintain all rows in the workshop table (3 workshops -> 3 objects)
+        //array of object to maintain all rows in the workshop table (3 workshops -> 3 objects)
             $workshops = [
                 new workshop('pexels-ksenia-chernaya-3965526.jpg','Kids Workshop','workshop.html#kids'),
                 new workshop('image copy.png','Group Workshop','workshop.html#group'),
@@ -143,25 +141,18 @@
 
             //function to display the content of the table using the workshops array of objects
             function displayTable($workshops) {
-                echo '<table id="workshop-table" style="margin-left: 50px; display: flex; justify-content: center;" cellpadding="10">';
-                echo '<tbody>';
-                //Iterate over the workshops objects
+                echo '<div id="workshop-container" style="display: flex; justify-content: center; margin-left: 50px;text-align: center;">';
+                // Iterate over the workshops objects
                 foreach ($workshops as $workshop) {
-                    echo '<tr>';
-                    // first display the image of the workshop
-                    echo '<td>';
+                    echo '<div style="margin: 60px;">';
                     echo '<img src="' . $workshop->image . '" alt="' . $workshop->name . '" height="300px" width="320px">';
-                    echo '</td>';
-                    // then display the button
-                    echo '<td>';
+                    echo '<div style="margin-top: 10px;>';
                     echo $workshop->createButton();
-                    echo '</td>';
-                    echo '</tr>';
+                    echo '</div>';
+                    echo '</div>';
                 }
-                echo '</tbody>';
-                echo '</table>';
+                echo '</div>';
             }
-
         ?>
 
         <?php 
@@ -169,41 +160,7 @@
         displayTable($workshops); ?>
         
         <script>
-            function Workshop(image, name, link){
-                this.image = image;
-                this.name = name;
-                this.link = link;
-                this.createButton = function() {
-                    const addButton = document.createElement('button');
-                    addButton.textContent = name;
-                    addButton.className = 'btn btn-outline-dark';
-                    addButton.style.alignItems = 'center';
-                    addButton.onclick = function() {
-                        window.location.href = link;
-                    };
-                    return addButton;
-                }
-            }
-
-            const workshops = [
-                new Workshop('pexels-ksenia-chernaya-3965526.jpg','Kids Workshop','workshop.html#kids'),
-                new Workshop('image copy.png','Group Workshop','workshop.html#group'),
-                new Workshop('pexels-anastasia-shuraeva-5566939.jpg','Individual Workshop','workshop.html#individual')
-            ];
-
-            function populateWorkshopTable(){
-                const tableBody = document.querySelector('#workshop-table tbody');
-                tableBody.innerHTML = '';
-                const row2 = tableBody.insertRow();
-                workshops.forEach(workshop => {
-                    
-                
-                    // Insert button cell
-                    const buttonCell = row2.insertCell();
-                    const addButton = workshop.createButton();
-                    buttonCell.appendChild(addButton);
-                });
-            }
+        
 
             function search() {
                 // Get the search query from the input field
