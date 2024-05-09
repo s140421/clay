@@ -179,6 +179,15 @@
     <br/>
     <h1 style="color: #91988a; text-align: center; font-size: 80px;font-family: 'Caveat', sans-serif ; font-style: italic;">All Products</h1>
     <hr>
+    <div style="text-align: center; background-color: #f2f2f2;">
+        <br>
+        <form action="search.php" method="POST">
+            <input type="text" name="search_query" id="search-input" placeholder="Search for a product">
+            <button type="submit" class="btn btn-outline-dark">Search</button>
+        </form>
+        <br>
+    </div>
+    <br>
     <div id="product-table" class="row"></div>
     
     <!-- Shopping cart -->
@@ -190,19 +199,15 @@
         <br>
         <div style="font-family: 'Times New Roman', Times, serif;" id="total"></div>
         <br>
-        <div style="text-align: center;">
-                  <!-- Search form -->
-                  <form action="search.php" method="POST">
-                    <input type="text" name="search_query" id="search-input" placeholder="Search...">
-                    <button type="submit" class="btn btn-outline-dark">Search</button>
-                </form>
-            </div>
+        
+        <h3 style="font-family: 'Times New Roman', Times, serif;">Add and delete orders in the cart page..</h3>
+        <a href="cart.html">
+            <button class="btn-primary" style="background-color: #91988a; color: white; align-items: center;">Cart</button>
+        </a>
             <br>
-            <div id="search-results" style="text-align: center;"></div>
-            <br>
-        </div>
-        <br>
-        <br>
+    </div>
+    <br>
+    <br>
 </body>
 <footer class="footer"></footer>
 </html>
